@@ -56,7 +56,9 @@ func init() {
 		},
 	}
 
-	LoadConfig(&config, configPath)
+	if err := LoadConfig(&config, configPath); err != nil {
+		log.Panic("LoadConfig failed", err)
+	}
 
 	if config.Env == "prod" {
 		config.Logger.Level = zap.ErrorLevel
