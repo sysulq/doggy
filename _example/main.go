@@ -1,10 +1,10 @@
 package main
 
 import (
-	"doggy"
 	"net/http"
 	"time"
 
+	"github.com/hnlq715/doggy"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
