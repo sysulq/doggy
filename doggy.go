@@ -9,7 +9,7 @@ func New(handlers ...negroni.Handler) *negroni.Negroni {
 	return negroni.New()
 }
 
-func NewStd() *negroni.Negroni {
+func Classic() *negroni.Negroni {
 	n := negroni.New()
 	n.UseFunc(Recovery)
 	n.UseFunc(Logger)
