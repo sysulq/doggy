@@ -1,7 +1,6 @@
 package doggy
 
 import (
-	"log"
 	"os"
 	"path/filepath"
 	"time"
@@ -34,6 +33,8 @@ type HttpClientConfig struct {
 
 var config Config
 
+// LoadSection loads and parses specific section from INI config file.
+// It will return error if list contains nonexistent files.
 func LoadSection(v interface{}, name string, section string) error {
 	file, err := ini.Load(name)
 	if err != nil {
@@ -43,7 +44,9 @@ func LoadSection(v interface{}, name string, section string) error {
 	return file.Section(section).MapTo(v)
 }
 
-func LoadConfig(name string) {
+// LoadConfig loads and parses INI config file.
+// It will return error if list contains nonexistent files.
+func LoadConfig(name string) error {
 	config = Config{
 		Listen: "0.0.0.0:8000",
 		Env:    "dev",
@@ -60,7 +63,7 @@ func LoadConfig(name string) {
 	}
 
 	if err := ini.MapTo(&config, name); err != nil {
-		log.Panic("LoadConfig failed", err)
+		return err
 	}
 
 	if config.Env == "prod" {
@@ -70,12 +73,13 @@ func LoadConfig(name string) {
 	if len(config.Logger.Dir) != 0 {
 		name, err := filepath.Abs(config.Logger.Dir)
 		if err != nil {
-			log.Panic("os.OpenFile failed", err)
+			return err
 		}
 		l, err := os.OpenFile(name, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0600)
 		if err != nil {
-			log.Panic("os.OpenFile failed", err)
+			return err
 		}
 		config.Logger.File = l
 	}
+	return nil
 }

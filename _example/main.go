@@ -24,7 +24,7 @@ func main() {
 		doggy.Text(w, 200, "pong")
 	})
 
-	n := doggy.NewStd()
+	n := doggy.Classic()
 	n.UseFunc(doggy.Prometheus)
 	n.UseHandler(m)
 
