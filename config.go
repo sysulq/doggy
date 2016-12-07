@@ -15,6 +15,7 @@ type Config struct {
 	Env        string           `ini:"env"`
 	Logger     LoggerConfig     `ini:"log"`
 	Middleware MiddlewareConfig `ini:"middleware"`
+	HttpClient HttpClientConfig `ini:"httpclient"`
 }
 
 type LoggerConfig struct {
@@ -24,6 +25,10 @@ type LoggerConfig struct {
 }
 
 type MiddlewareConfig struct {
+	Timeout time.Duration `ini:"timeout"`
+}
+
+type HttpClientConfig struct {
 	Timeout time.Duration `ini:"timeout"`
 }
 
@@ -52,6 +57,9 @@ func init() {
 			File:  os.Stdout,
 		},
 		Middleware: MiddlewareConfig{
+			Timeout: 5 * time.Second,
+		},
+		HttpClient: HttpClientConfig{
 			Timeout: 5 * time.Second,
 		},
 	}
