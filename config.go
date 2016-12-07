@@ -32,23 +32,18 @@ type HttpClientConfig struct {
 	Timeout time.Duration `ini:"timeout"`
 }
 
-var configPath = "config.ini"
-
-func SetConfigPath(path string) {
-	configPath = path
-}
-
 var config Config
 
-func LoadConfig(v, source interface{}, others ...interface{}) error {
-	err := ini.MapTo(v, source, others...)
+func LoadSection(v interface{}, name string, section string) error {
+	file, err := ini.Load(name)
 	if err != nil {
 		return err
 	}
-	return nil
+
+	return file.Section(section).MapTo(v)
 }
 
-func init() {
+func LoadConfig(name string) {
 	config = Config{
 		Listen: "0.0.0.0:8000",
 		Env:    "dev",
@@ -64,7 +59,7 @@ func init() {
 		},
 	}
 
-	if err := LoadConfig(&config, configPath); err != nil {
+	if err := ini.MapTo(&config, name); err != nil {
 		log.Panic("LoadConfig failed", err)
 	}
 

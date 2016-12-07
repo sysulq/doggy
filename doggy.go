@@ -23,3 +23,7 @@ func NewStd() *negroni.Negroni {
 func NewMux() *mux.Router {
 	return mux.NewRouter()
 }
+
+func init() {
+	LoadConfig("config.ini")
+}
