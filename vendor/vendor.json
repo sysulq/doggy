@@ -33,6 +33,12 @@
 			"revisionTime": "2016-09-20T23:08:13Z"
 		},
 		{
+			"checksumSHA1": "CoHC6AjQ9ssJV1byP1iOJN07z2Q=",
+			"path": "github.com/gorilla/schema",
+			"revision": "08023a0215e7fc27a9aecd8b8c50913c40019478",
+			"revisionTime": "2016-04-26T23:15:12Z"
+		},
+		{
 			"checksumSHA1": "O/QVS0SPzCiPTGKR1H9FVGUmki4=",
 			"path": "github.com/julienschmidt/httprouter",
 			"revision": "5dd70ee059943e81987a817fa1a755b11dd119c1",
