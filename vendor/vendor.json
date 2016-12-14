@@ -33,6 +33,12 @@
 			"revisionTime": "2016-09-20T23:08:13Z"
 		},
 		{
+			"checksumSHA1": "O/QVS0SPzCiPTGKR1H9FVGUmki4=",
+			"path": "github.com/julienschmidt/httprouter",
+			"revision": "5dd70ee059943e81987a817fa1a755b11dd119c1",
+			"revisionTime": "2016-12-03T08:33:52Z"
+		},
+		{
 			"checksumSHA1": "bQ9BML+wAZd81vdDAOC1U+yN8dU=",
 			"path": "github.com/matttproud/golang_protobuf_extensions/pbutil",
 			"revision": "c12348ce28de40eed0136aa2b644d0ee0650e56c",
@@ -97,6 +103,12 @@
 			"path": "github.com/urfave/negroni",
 			"revision": "cd9734011043904139c24dbad9a71b21f1586f36",
 			"revisionTime": "2016-11-27T19:24:14Z"
+		},
+		{
+			"checksumSHA1": "uaa/TsoZ+3cVn8BKHRnjlZLPdxQ=",
+			"path": "gopkg.in/asaskevich/govalidator.v4",
+			"revision": "7664702784775e51966f0885f5cd27435916517b",
+			"revisionTime": "2016-05-18T19:07:39Z"
 		}
 	],
 	"rootPath": "doggy"
