@@ -2,6 +2,7 @@ package doggy
 
 import (
 	"github.com/gorilla/mux"
+	"github.com/julienschmidt/httprouter"
 	"github.com/urfave/negroni"
 )
 
@@ -33,6 +34,11 @@ func Classic() *negroni.Negroni {
 // NewMux returns a new router instance.
 func NewMux() *mux.Router {
 	return mux.NewRouter()
+}
+
+// NewHttpRouter returns a new httprouter instance.
+func NewHttpRouter() *httprouter.Router {
+	return httprouter.New()
 }
 
 func init() {
