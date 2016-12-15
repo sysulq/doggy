@@ -1,6 +1,7 @@
 package doggy
 
 import (
+	"flag"
 	"os"
 	"path/filepath"
 	"time"
@@ -34,7 +35,14 @@ type HttpClientConfig struct {
 	Retry   uint          `ini:"retry"`
 }
 
-var config *Config
+var (
+	config     *Config
+	configFile = flag.String("c", "config.ini", "config file name")
+)
+
+func ConfigFile() string {
+	return *configFile
+}
 
 // LoadSection loads and parses specific section from INI config file.
 // It will return error if list contains nonexistent files.
@@ -91,5 +99,5 @@ func initConfig() error {
 		},
 	}
 
-	return config.Load("config.ini")
+	return config.Load(*configFile)
 }
