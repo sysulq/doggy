@@ -1,6 +1,9 @@
 Doggy
 ===
 
+Lightweight, idiomatic and stable for building Go 1.7+ HTTP services.
+It aims to provide a composable way to develop HTTP services.
+
 dependency
 ---
 
