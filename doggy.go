@@ -1,6 +1,8 @@
 package doggy
 
 import (
+	"log"
+
 	"github.com/gorilla/mux"
 	"github.com/julienschmidt/httprouter"
 	"github.com/urfave/negroni"
@@ -43,6 +45,10 @@ func NewHttpRouter() *httprouter.Router {
 
 func init() {
 	// Load default config
-	LoadConfig("config.ini")
+	err := initConfig()
+	if err != nil {
+		log.Panic(err)
+	}
+
 	initHttp()
 }

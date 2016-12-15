@@ -32,7 +32,7 @@ type HttpClientConfig struct {
 	Retry   uint          `ini:"retry"`
 }
 
-var config Config
+var config *Config
 
 // LoadSection loads and parses specific section from INI config file.
 // It will return error if list contains nonexistent files.
@@ -45,26 +45,10 @@ func LoadSection(v interface{}, name string, section string) error {
 	return file.Section(section).MapTo(v)
 }
 
-// LoadConfig loads and parses INI config file.
+// Load loads and parses INI config file.
 // It will return error if list contains nonexistent files.
-func LoadConfig(name string) error {
-	config = Config{
-		Listen: "0.0.0.0:8000",
-		Env:    "dev",
-		Logger: LoggerConfig{
-			Level: zap.DebugLevel,
-			File:  os.Stdout,
-		},
-		Middleware: MiddlewareConfig{
-			Timeout: 5 * time.Second,
-		},
-		HttpClient: HttpClientConfig{
-			Timeout: 5 * time.Second,
-			Retry:   3,
-		},
-	}
-
-	if err := ini.MapTo(&config, name); err != nil {
+func (config *Config) Load(name string) error {
+	if err := ini.MapTo(config, name); err != nil {
 		return err
 	}
 
@@ -84,4 +68,24 @@ func LoadConfig(name string) error {
 		config.Logger.File = l
 	}
 	return nil
+}
+
+func initConfig() error {
+	config = &Config{
+		Listen: "0.0.0.0:8000",
+		Env:    "dev",
+		Logger: LoggerConfig{
+			Level: zap.DebugLevel,
+			File:  os.Stdout,
+		},
+		Middleware: MiddlewareConfig{
+			Timeout: 5 * time.Second,
+		},
+		HttpClient: HttpClientConfig{
+			Timeout: 5 * time.Second,
+			Retry:   3,
+		},
+	}
+
+	return config.Load("config.ini")
 }
