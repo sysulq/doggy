@@ -9,6 +9,12 @@
 			"revisionTime": "2016-08-04T10:47:26Z"
 		},
 		{
+			"checksumSHA1": "KzSrcxUDg+p3I7qKJLF2wr1U5So=",
+			"path": "github.com/facebookgo/httpcontrol",
+			"revision": "ccde4420e1fee9af5da365cb76075b95683f39a6",
+			"revisionTime": "2015-07-08T23:40:01Z"
+		},
+		{
 			"checksumSHA1": "4w2k9BtpBOegw68gkcjf95Gur98=",
 			"path": "github.com/go-ini/ini",
 			"revision": "2ba15ac2dc9cdf88c110ec2dc0ced7fa45f5678c",

@@ -8,15 +8,31 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/facebookgo/httpcontrol"
 	"github.com/uber-go/zap"
 )
+
+var (
+	defaultClient *http.Client
+)
+
+func initHttp() {
+	defaultClient = &http.Client{
+		Transport: &httpcontrol.Transport{
+			RequestTimeout: config.HttpClient.Timeout,
+			MaxTries:       config.HttpClient.Retry,
+		},
+	}
+}
 
 func ListenAndServe(handler http.Handler) error {
 	return http.ListenAndServe(config.Listen, handler)
 }
 
-func NewRequest(ctx context.Context, method, url string, body []byte) ([]byte, error) {
+func newRequest(ctx context.Context, method, url string, body []byte) ([]byte, error) {
 	l := LogFromContext(ctx).With(zap.String("query", url), zap.String("type", "http"), zap.String("direction", "out"))
+	now := time.Now()
+
 	req, err := http.NewRequest(method, url, bytes.NewReader(body))
 	if err != nil {
 		l.Error("http.NewRequest failed", zap.Error(err))
@@ -27,19 +43,15 @@ func NewRequest(ctx context.Context, method, url string, body []byte) ([]byte, e
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	}
 
-	now := time.Now()
-	http.DefaultClient.Timeout = config.HttpClient.Timeout
-
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := defaultClient.Do(req)
 	if err != nil {
-		l.Error("http.DefaultClient.Do failed", zap.Error(err), zap.Float64("responsetime", time.Now().Sub(now).Seconds()))
+		l.Error("defaultClient.Get failed", zap.Error(err), zap.Float64("responsetime", time.Now().Sub(now).Seconds()))
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var data []byte
 	l = l.With(zap.Float64("responsetime", time.Now().Sub(now).Seconds()))
-
-	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
 		data, err = ioutil.ReadAll(resp.Body)
@@ -56,7 +68,15 @@ func NewRequest(ctx context.Context, method, url string, body []byte) ([]byte, e
 		return nil, err
 	}
 
-	l.Info("newRequest finished", zap.String("POST", string(body)))
+	l.Info("newRequest finished")
 
 	return data, nil
+}
+
+func Get(ctx context.Context, url string) ([]byte, error) {
+	return newRequest(ctx, "GET", url, nil)
+}
+
+func Post(ctx context.Context, url string, body []byte) ([]byte, error) {
+	return newRequest(ctx, "GET", url, body)
 }

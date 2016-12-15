@@ -44,4 +44,5 @@ func NewHttpRouter() *httprouter.Router {
 func init() {
 	// Load default config
 	LoadConfig("config.ini")
+	initHttp()
 }

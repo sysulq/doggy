@@ -29,6 +29,7 @@ type MiddlewareConfig struct {
 
 type HttpClientConfig struct {
 	Timeout time.Duration `ini:"timeout"`
+	Retry   uint          `ini:"retry"`
 }
 
 var config Config
@@ -59,6 +60,7 @@ func LoadConfig(name string) error {
 		},
 		HttpClient: HttpClientConfig{
 			Timeout: 5 * time.Second,
+			Retry:   3,
 		},
 	}
 
