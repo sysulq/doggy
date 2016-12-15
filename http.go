@@ -78,5 +78,5 @@ func Get(ctx context.Context, url string) ([]byte, error) {
 }
 
 func Post(ctx context.Context, url string, body []byte) ([]byte, error) {
-	return newRequest(ctx, "GET", url, body)
+	return newRequest(ctx, "POST", url, body)
 }
