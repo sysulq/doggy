@@ -24,7 +24,9 @@ type LoggerConfig struct {
 }
 
 type MiddlewareConfig struct {
-	Timeout time.Duration `ini:"timeout"`
+	Timeout  time.Duration `ini:"timeout"`
+	Rate     float64       `ini:"rate"`
+	Capacity int64         `ini:"capacity"`
 }
 
 type HttpClientConfig struct {
@@ -79,7 +81,9 @@ func initConfig() error {
 			File:  os.Stdout,
 		},
 		Middleware: MiddlewareConfig{
-			Timeout: 5 * time.Second,
+			Timeout:  5 * time.Second,
+			Rate:     5000,
+			Capacity: 1000,
 		},
 		HttpClient: HttpClientConfig{
 			Timeout: 5 * time.Second,
