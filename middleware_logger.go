@@ -26,7 +26,7 @@ func Logger(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 func LogFromContext(ctx context.Context) zap.Logger {
 	l, ok := ctx.Value(zapKey).(zap.Logger)
 	if !ok {
-		return zap.New(zap.NewJSONEncoder(TimeFormat("timestamp")), zap.AddCaller(), config.Logger.Level, zap.Output(config.Logger.File))
+		return zap.New(zap.NewJSONEncoder(timeFormat("timestamp")), zap.AddCaller(), config.Logger.Level, zap.Output(config.Logger.File))
 	}
 	return l
 }
@@ -35,7 +35,7 @@ func ContextWithLog(ctx context.Context, log zap.Logger) context.Context {
 	return context.WithValue(ctx, zapKey, log)
 }
 
-func TimeFormat(key string) zap.TimeFormatter {
+func timeFormat(key string) zap.TimeFormatter {
 	return zap.TimeFormatter(func(t time.Time) zap.Field {
 		return zap.String(key, t.Local().Format("2006-01-02T15:04:05.000Z0700"))
 	})
