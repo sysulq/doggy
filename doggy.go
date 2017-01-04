@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/gorilla/mux"
+	"github.com/hnlq715/doggy/middleware"
 	"github.com/julienschmidt/httprouter"
 	"github.com/urfave/negroni"
 )
@@ -24,12 +25,12 @@ func New(handlers ...negroni.Handler) *negroni.Negroni {
 // Timeout - Stop Process When Timeout
 func Classic() *negroni.Negroni {
 	n := negroni.New()
-	n.Use(NewRecovery())
-	n.Use(NewLogger())
-	n.Use(NewTraceID())
-	n.Use(NewRealIP())
-	n.Use(NewCloseNotify())
-	n.Use(NewTimeout())
+	n.Use(middleware.NewRecovery())
+	n.Use(middleware.NewLogger())
+	n.Use(middleware.NewTraceID())
+	n.Use(middleware.NewRealIP())
+	n.Use(middleware.NewCloseNotify())
+	n.Use(middleware.NewTimeout())
 	return n
 }
 

@@ -3,6 +3,7 @@ package doggy
 import (
 	"context"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/uber-go/zap"
@@ -12,16 +13,21 @@ import (
 const zapKey = "zapKey"
 
 type Logger struct {
+	Level zap.Level
+	File  *os.File
 }
 
 // NewLogger returns a new Logger instance
-func NewLogger() *Logger {
-	return &Logger{}
+func NewLogger(level zap.Level, file *os.File) *Logger {
+	return &Logger{
+		Level: level,
+		File:  file,
+	}
 }
 
-func (l *Logger) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+func (m *Logger) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	now := time.Now()
-	log := LogFromContext(r.Context())
+	log := zap.New(zap.NewJSONEncoder(timeFormat("timestamp")), zap.AddCaller(), m.Level, zap.Output(m.File))
 	ctx := ContextWithLog(r.Context(), log)
 	ww := negroni.NewResponseWriter(rw)
 
@@ -34,7 +40,7 @@ func (l *Logger) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.Ha
 func LogFromContext(ctx context.Context) zap.Logger {
 	l, ok := ctx.Value(zapKey).(zap.Logger)
 	if !ok {
-		return zap.New(zap.NewJSONEncoder(timeFormat("timestamp")), zap.AddCaller(), config.Logger.Level, zap.Output(config.Logger.File))
+		return zap.New(zap.NewJSONEncoder(timeFormat("timestamp")), zap.AddCaller())
 	}
 	return l
 }
