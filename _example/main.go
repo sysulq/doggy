@@ -25,7 +25,7 @@ func main() {
 	})
 
 	n := doggy.Classic()
-	n.UseFunc(doggy.Prometheus)
+	n.Use(doggy.NewPrometheus())
 	n.UseHandler(m)
 
 	doggy.ListenAndServe(n)
