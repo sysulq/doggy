@@ -14,11 +14,19 @@ import (
 // specified rate.
 var rb *ratelimit.Bucket
 
+type RateLimit struct {
+}
+
+// NewRateLimit returns a new RateLimit instance
+func NewRateLimit() *RateLimit {
+	return &RateLimit{}
+}
+
 // RateLimit is an Middleware that acts as a
 // request throttler based on a token-bucket algorithm. Requests that would
 // exceed the maximum request rate are delayed via the parameterized sleep
 // function.
-func RateLimit(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+func (m *RateLimit) ServerHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	if rb == nil {
 		rb = ratelimit.NewBucketWithRate(config.Middleware.Rate, config.Middleware.Capacity)
 	}

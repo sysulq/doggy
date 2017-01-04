@@ -24,12 +24,12 @@ func New(handlers ...negroni.Handler) *negroni.Negroni {
 // Timeout - Stop Process When Timeout
 func Classic() *negroni.Negroni {
 	n := negroni.New()
-	n.UseFunc(Recovery)
-	n.UseFunc(Logger)
-	n.UseFunc(TraceID)
-	n.UseFunc(RealIP)
-	n.UseFunc(CloseNotify)
-	n.UseFunc(Timeout)
+	n.Use(NewRecovery())
+	n.Use(NewLogger())
+	n.Use(NewTraceID())
+	n.Use(NewRealIP())
+	n.Use(NewCloseNotify())
+	n.Use(NewTimeout())
 	return n
 }
 

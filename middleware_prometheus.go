@@ -21,7 +21,15 @@ var (
 	})
 )
 
-func Prometheus(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+type Prometheus struct {
+}
+
+// NewPrometheus returns a new Prometheus instance
+func NewPrometheus() *Prometheus {
+	return &Prometheus{}
+}
+
+func (p *Prometheus) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	now := time.Now()
 
 	next(rw, r)

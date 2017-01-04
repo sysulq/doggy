@@ -36,7 +36,15 @@ func init() {
 	prefix = fmt.Sprintf("%s/%s", hostname, b64[0:10])
 }
 
-func TraceID(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+type TraceID struct {
+}
+
+// NewTraceID returns a new TraceID instance
+func NewTraceID() *TraceID {
+	return &TraceID{}
+}
+
+func (m *TraceID) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	myid := atomic.AddUint64(&reqid, 1)
 	traceID := fmt.Sprintf("%s-%06d", prefix, myid)
 	ctx := context.WithValue(r.Context(), requestIDKey, traceID)

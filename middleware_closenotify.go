@@ -7,7 +7,15 @@ import (
 
 const StatusClientClosedRequest = 499
 
-func CloseNotify(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+type CloseNotify struct {
+}
+
+// NewCloseNotify returns a new CloseNotify instance
+func NewCloseNotify() *CloseNotify {
+	return &CloseNotify{}
+}
+
+func (c *CloseNotify) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 
 	ctx, cancel := context.WithCancel(r.Context())
 	defer cancel()

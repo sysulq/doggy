@@ -11,7 +11,15 @@ import (
 
 const zapKey = "zapKey"
 
-func Logger(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+type Logger struct {
+}
+
+// NewLogger returns a new Logger instance
+func NewLogger() *Logger {
+	return &Logger{}
+}
+
+func (l *Logger) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	now := time.Now()
 	log := LogFromContext(r.Context())
 	ctx := ContextWithLog(r.Context(), log)

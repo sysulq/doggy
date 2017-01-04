@@ -5,7 +5,15 @@ import (
 	"net/http"
 )
 
-func Timeout(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+type Timeout struct {
+}
+
+// NewTimeout returns a new Timeout instance
+func NewTimeout() *Timeout {
+	return &Timeout{}
+}
+
+func (m *Timeout) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	ctx, cancel := context.WithTimeout(r.Context(), config.Middleware.Timeout)
 	defer func() {
 		cancel()

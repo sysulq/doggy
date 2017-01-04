@@ -8,7 +8,15 @@ import (
 var xForwardedFor = http.CanonicalHeaderKey("X-Forwarded-For")
 var xRealIP = http.CanonicalHeaderKey("X-Real-IP")
 
-func RealIP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+type RealIP struct {
+}
+
+// NewRealIP returns a new RealIP instance
+func NewRealIP() *RealIP {
+	return &RealIP{}
+}
+
+func (m *RealIP) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	if rip := realIP(r); rip != "" {
 		r.RemoteAddr = rip
 	}
