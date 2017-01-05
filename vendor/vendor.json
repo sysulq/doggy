@@ -15,10 +15,10 @@
 			"revisionTime": "2015-07-08T23:40:01Z"
 		},
 		{
-			"checksumSHA1": "4w2k9BtpBOegw68gkcjf95Gur98=",
+			"checksumSHA1": "vPYNgNvAIgecEXHiIr7IJosh2n4=",
 			"path": "github.com/go-ini/ini",
-			"revision": "2ba15ac2dc9cdf88c110ec2dc0ced7fa45f5678c",
-			"revisionTime": "2016-11-20T03:10:36Z"
+			"revision": "6f66b0e091edb3c7b380f7c4f0f884274d550b67",
+			"revisionTime": "2016-12-21T12:03:40Z"
 		},
 		{
 			"checksumSHA1": "FhQtBYq3/nSeuhKzWoHw26fkzng=",
@@ -39,13 +39,13 @@
 			"revisionTime": "2016-09-20T23:08:13Z"
 		},
 		{
-			"checksumSHA1": "CoHC6AjQ9ssJV1byP1iOJN07z2Q=",
+			"checksumSHA1": "Iil/hyeKgR57mEvChfpWk1u9Avo=",
 			"path": "github.com/gorilla/schema",
-			"revision": "08023a0215e7fc27a9aecd8b8c50913c40019478",
-			"revisionTime": "2016-04-26T23:15:12Z"
+			"revision": "0164a00ab4cd01d814d8cd5bf63fd9fcea30e23b",
+			"revisionTime": "2016-08-17T19:01:22Z"
 		},
 		{
-			"checksumSHA1": "nO8EKiLcjb35b8LWj3v9IoQaRuU=",
+			"checksumSHA1": "SbSS5/xEDdcjv23wnGDwnjm2ztA=",
 			"path": "github.com/hnlq715/doggy/middleware",
 			"revision": "8498611289e1e3dbe45a615fcccd8ed15d312eae",
 			"revisionTime": "2017-01-05T07:46:49Z"
@@ -59,8 +59,8 @@
 		{
 			"checksumSHA1": "O/QVS0SPzCiPTGKR1H9FVGUmki4=",
 			"path": "github.com/julienschmidt/httprouter",
-			"revision": "5dd70ee059943e81987a817fa1a755b11dd119c1",
-			"revisionTime": "2016-12-03T08:33:52Z"
+			"revision": "8a45e95fc75cb77048068a62daed98cc22fdac7c",
+			"revisionTime": "2017-01-04T18:58:16Z"
 		},
 		{
 			"checksumSHA1": "bQ9BML+wAZd81vdDAOC1U+yN8dU=",
