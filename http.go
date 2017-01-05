@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"time"
 
+	middleware "doggy/middleware"
+
 	"github.com/facebookgo/httpcontrol"
 	"github.com/uber-go/zap"
 )
@@ -30,7 +32,7 @@ func ListenAndServe(handler http.Handler) error {
 }
 
 func newRequest(ctx context.Context, method, url string, body []byte) ([]byte, error) {
-	l := LogFromContext(ctx).With(zap.String("query", url), zap.String("type", "http"), zap.String("direction", "out"))
+	l := middleware.LogFromContext(ctx).With(zap.String("query", url), zap.String("type", "http"), zap.String("direction", "out"))
 	now := time.Now()
 
 	req, err := http.NewRequest(method, url, bytes.NewReader(body))

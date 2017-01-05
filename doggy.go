@@ -3,8 +3,9 @@ package doggy
 import (
 	"log"
 
+	middleware "doggy/middleware"
+
 	"github.com/gorilla/mux"
-	"github.com/hnlq715/doggy/middleware"
 	"github.com/julienschmidt/httprouter"
 	"github.com/urfave/negroni"
 )
@@ -26,11 +27,11 @@ func New(handlers ...negroni.Handler) *negroni.Negroni {
 func Classic() *negroni.Negroni {
 	n := negroni.New()
 	n.Use(middleware.NewRecovery())
-	n.Use(middleware.NewLogger())
+	n.Use(middleware.NewLogger(config.Logger.Level, config.Logger.File))
 	n.Use(middleware.NewTraceID())
 	n.Use(middleware.NewRealIP())
 	n.Use(middleware.NewCloseNotify())
-	n.Use(middleware.NewTimeout())
+	n.Use(middleware.NewTimeout(config.Middleware.Timeout))
 	return n
 }
 
