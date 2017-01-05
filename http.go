@@ -26,10 +26,6 @@ func initHttp() {
 	}
 }
 
-func ListenAndServe(handler http.Handler) error {
-	return http.ListenAndServe(config.Listen, handler)
-}
-
 func newRequest(ctx context.Context, method, url string, body []byte) ([]byte, error) {
 	l := middleware.LogFromContext(ctx).With(zap.String("query", url), zap.String("type", "http"), zap.String("direction", "out"))
 	now := time.Now()
