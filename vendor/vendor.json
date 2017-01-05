@@ -45,12 +45,6 @@
 			"revisionTime": "2016-08-17T19:01:22Z"
 		},
 		{
-			"checksumSHA1": "SbSS5/xEDdcjv23wnGDwnjm2ztA=",
-			"path": "github.com/hnlq715/doggy/middleware",
-			"revision": "8498611289e1e3dbe45a615fcccd8ed15d312eae",
-			"revisionTime": "2017-01-05T07:46:49Z"
-		},
-		{
 			"checksumSHA1": "73SV14dZG7MAb+znuh3ceTUWwjQ=",
 			"path": "github.com/juju/ratelimit",
 			"revision": "77ed1c8a01217656d2080ad51981f6e99adaa177",
