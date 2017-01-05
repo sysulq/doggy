@@ -13,12 +13,12 @@ import (
 const zapKey = "zapKey"
 
 type Logger struct {
-	Level zap.Level
+	Level int32
 	File  *os.File
 }
 
 // NewLogger returns a new Logger instance
-func NewLogger(level zap.Level, file *os.File) *Logger {
+func NewLogger(level int32, file *os.File) *Logger {
 	return &Logger{
 		Level: level,
 		File:  file,
@@ -27,7 +27,7 @@ func NewLogger(level zap.Level, file *os.File) *Logger {
 
 func (m *Logger) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	now := time.Now()
-	log := zap.New(zap.NewJSONEncoder(timeFormat("timestamp")), zap.AddCaller(), m.Level, zap.Output(m.File))
+	log := zap.New(zap.NewJSONEncoder(timeFormat("timestamp")), zap.AddCaller(), zap.Level(m.Level), zap.Output(m.File))
 	ctx := ContextWithLog(r.Context(), log)
 	ww := negroni.NewResponseWriter(rw)
 

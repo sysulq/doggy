@@ -8,9 +8,8 @@ import (
 	"net/http"
 	"time"
 
-	middleware "doggy/middleware"
-
 	"github.com/facebookgo/httpcontrol"
+	"github.com/hnlq715/doggy/middleware"
 	"github.com/uber-go/zap"
 )
 
