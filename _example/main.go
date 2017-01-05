@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/hnlq715/doggy"
+	"github.com/hnlq715/doggy/middleware"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
@@ -25,7 +26,7 @@ func main() {
 	})
 
 	n := doggy.Classic()
-	n.Use(doggy.NewPrometheus())
+	n.Use(middleware.NewPrometheus())
 	n.UseHandler(m)
 
 	doggy.ListenAndServe(n)
