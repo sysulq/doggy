@@ -1,4 +1,4 @@
-package doggy
+package middleware
 
 import (
 	"net/http"
