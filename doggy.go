@@ -3,9 +3,8 @@ package doggy
 import (
 	"log"
 
-	middleware "doggy/middleware"
-
 	"github.com/gorilla/mux"
+	"github.com/hnlq715/doggy/middleware"
 	"github.com/julienschmidt/httprouter"
 	"github.com/urfave/negroni"
 )

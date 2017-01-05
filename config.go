@@ -19,9 +19,9 @@ type Config struct {
 }
 
 type LoggerConfig struct {
-	File  *os.File  `ini:"-"`
-	Level zap.Level `ini:"level"`
-	Dir   string    `ini:"dir"`
+	File  *os.File `ini:"-"`
+	Level int32    `ini:"level"`
+	Dir   string   `ini:"dir"`
 }
 
 type MiddlewareConfig struct {
@@ -63,7 +63,7 @@ func (config *Config) Load(name string) error {
 	}
 
 	if config.Env == "prod" {
-		config.Logger.Level = zap.ErrorLevel
+		config.Logger.Level = int32(zap.ErrorLevel)
 	}
 
 	if len(config.Logger.Dir) != 0 {
@@ -85,7 +85,7 @@ func initConfig() error {
 		Listen: "0.0.0.0:8000",
 		Env:    "dev",
 		Logger: LoggerConfig{
-			Level: zap.DebugLevel,
+			Level: int32(zap.DebugLevel),
 			File:  os.Stdout,
 		},
 		Middleware: MiddlewareConfig{
