@@ -1,4 +1,4 @@
-package doggy
+package render
 
 import (
 	"net/http"

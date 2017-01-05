@@ -6,6 +6,7 @@ import (
 
 	"github.com/hnlq715/doggy"
 	"github.com/hnlq715/doggy/middleware"
+	"github.com/hnlq715/doggy/render"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
@@ -22,7 +23,7 @@ func main() {
 			return
 		case <-time.After(processTime):
 		}
-		doggy.Text(w, 200, "pong")
+		render.Text(w, 200, "pong")
 	})
 
 	n := doggy.Classic()
