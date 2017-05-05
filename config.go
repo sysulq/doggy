@@ -11,28 +11,28 @@ import (
 )
 
 type Config struct {
-	Listen     string           `ini:"listen"`
-	Env        string           `ini:"env"`
-	Logger     LoggerConfig     `ini:"log"`
-	Middleware MiddlewareConfig `ini:"middleware"`
-	HttpClient HttpClientConfig `ini:"httpclient"`
+	Listen     string
+	Env        string
+	Logger     LoggerConfig
+	Middleware MiddlewareConfig
+	HttpClient HttpClientConfig
 }
 
 type LoggerConfig struct {
-	File  *os.File `ini:"-"`
-	Level int32    `ini:"level"`
-	Dir   string   `ini:"dir"`
+	File  *os.File
+	Level int32
+	Dir   string
 }
 
 type MiddlewareConfig struct {
-	Timeout  time.Duration `ini:"timeout"`
-	Rate     float64       `ini:"rate"`
-	Capacity int64         `ini:"capacity"`
+	Timeout  time.Duration
+	Rate     float64
+	Capacity int64
 }
 
 type HttpClientConfig struct {
-	Timeout time.Duration `ini:"timeout"`
-	Retry   uint          `ini:"retry"`
+	Timeout time.Duration
+	Retry   uint
 }
 
 var (
@@ -58,7 +58,7 @@ func LoadSection(v interface{}, name string, section string) error {
 // Load loads and parses INI config file.
 // It will return error if list contains nonexistent files.
 func (config *Config) Load(name string) error {
-	if err := ini.MapTo(config, name); err != nil {
+	if err := ini.MapToWithMapper(config, ini.TitleUnderscore, name); err != nil {
 		return err
 	}
 
