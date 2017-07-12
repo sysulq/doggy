@@ -16,7 +16,7 @@ func main() {
 
 	m.Handle("/metrics", promhttp.Handler())
 	m.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-		processTime := 2 * time.Second
+		processTime := 4 * time.Second
 		ctx := r.Context()
 		select {
 		case <-ctx.Done():
@@ -30,5 +30,5 @@ func main() {
 	n.Use(middleware.NewPrometheus())
 	n.UseHandler(m)
 
-	doggy.ListenAndServe(n)
+	doggy.ListenAndServeGracefully(n)
 }

@@ -1,11 +1,18 @@
 package doggy
 
 import (
+	"context"
 	"fmt"
 	"net/http"
+	"os"
+	"os/signal"
+	"time"
+
+	"go.uber.org/zap"
 
 	"github.com/gorilla/mux"
 	"github.com/hnlq715/doggy/middleware"
+	"github.com/hnlq715/xgen/utils"
 	"github.com/julienschmidt/httprouter"
 	"github.com/spf13/viper"
 	"github.com/urfave/negroni"
@@ -50,6 +57,32 @@ func NewHttpRouter() *httprouter.Router {
 // ListenAndServe always returns a non-nil error.
 func ListenAndServe(handler http.Handler) error {
 	return http.ListenAndServe(viper.GetString("listen"), handler)
+}
+
+// ListenAndServeGracefully always returns a non-nil error.
+func ListenAndServeGracefully(handler http.Handler) error {
+	l := utils.LogFromContext(context.Background())
+
+	h := &http.Server{Addr: viper.GetString("listen"), Handler: handler}
+	go func() {
+		if err := h.ListenAndServe(); err != nil {
+			l.Error("h.ListenAndServe failed", zap.Error(err))
+		}
+	}()
+
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt)
+	<-stop
+
+	l.Info("Shutting down the server...")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	h.Shutdown(ctx)
+
+	l.Info("Server gracefully stopped")
+	return nil
 }
 
 func init() {

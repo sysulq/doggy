@@ -10,8 +10,10 @@ func loadConfig() error {
 	viper.SetDefault("listen", "0.0.0.0:8000")
 	viper.SetDefault("env", "dev")
 
-	viper.SetDefault("log.level", "debug")
 	viper.SetDefault("log.file", "")
+	viper.SetDefault("log.level", "debug")
+	viper.SetDefault("log.maxSize", 1024)
+	viper.SetDefault("log.maxAge", 7)
 
 	timeout, _ := time.ParseDuration("5s")
 	viper.SetDefault("middleware.timeout", timeout)
