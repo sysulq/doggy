@@ -2,9 +2,12 @@ package middleware
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
 	"time"
+
+	"go.uber.org/zap/zapcore"
 
 	"github.com/uber-go/zap"
 	"github.com/urfave/negroni"
@@ -13,12 +16,31 @@ import (
 const zapKey = "zapKey"
 
 type Logger struct {
-	Level int32
+	Level string
 	File  *os.File
 }
 
+var logLevel = map[string]zapcore.Level{
+	"debug":  zapcore.DebugLevel,
+	"info":   zapcore.InfoLevel,
+	"warn":   zapcore.WarnLevel,
+	"error":  zapcore.ErrorLevel,
+	"dpanic": zapcore.DPanicLevel,
+	"panic":  zapcore.PanicLevel,
+	"fatal":  zapcore.FatalLevel,
+}
+
 // NewLogger returns a new Logger instance
-func NewLogger(level int32, file *os.File) *Logger {
+func NewLogger(level string, name string) *Logger {
+	file := os.Stdout
+	if len(name) > 0 {
+		newFile, err := os.Open(name)
+		if err != nil {
+			fmt.Printf("os.Open %s failed, use os.Stdout, err=%s\n", name, err)
+		} else {
+			file = newFile
+		}
+	}
 	return &Logger{
 		Level: level,
 		File:  file,
@@ -27,7 +49,7 @@ func NewLogger(level int32, file *os.File) *Logger {
 
 func (m *Logger) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	now := time.Now()
-	log := zap.New(zap.NewJSONEncoder(timeFormat("timestamp")), zap.AddCaller(), zap.Level(m.Level), zap.Output(m.File))
+	log := zap.New(zap.NewJSONEncoder(timeFormat("timestamp")), zap.AddCaller(), zap.Level(logLevel[m.Level]), zap.Output(m.File))
 	ctx := ContextWithLog(r.Context(), log)
 	ww := negroni.NewResponseWriter(rw)
 

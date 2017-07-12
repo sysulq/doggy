@@ -7,6 +7,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/hnlq715/doggy/middleware"
 	"github.com/julienschmidt/httprouter"
+	"github.com/spf13/viper"
 	"github.com/urfave/negroni"
 )
 
@@ -27,11 +28,12 @@ func New(handlers ...negroni.Handler) *negroni.Negroni {
 func Classic() *negroni.Negroni {
 	n := negroni.New()
 	n.Use(middleware.NewRecovery())
-	n.Use(middleware.NewLogger(config.Logger.Level, config.Logger.File))
+	logViper := viper.Sub("log")
+	n.Use(middleware.NewLogger(logViper.GetString("level"), logViper.GetString("file")))
 	n.Use(middleware.NewTraceID())
 	n.Use(middleware.NewRealIP())
 	n.Use(middleware.NewCloseNotify())
-	n.Use(middleware.NewTimeout(config.Middleware.Timeout))
+	n.Use(middleware.NewTimeout(viper.GetDuration("middleware.timeout")))
 	return n
 }
 
@@ -47,15 +49,13 @@ func NewHttpRouter() *httprouter.Router {
 
 // ListenAndServe always returns a non-nil error.
 func ListenAndServe(handler http.Handler) error {
-	return http.ListenAndServe(config.Listen, handler)
+	return http.ListenAndServe(viper.GetString("listen"), handler)
 }
 
 func init() {
 	// Load default config
-	err := initConfig()
+	err := loadConfig()
 	if err != nil {
 		log.Panic(err)
 	}
-
-	initHttp()
 }
