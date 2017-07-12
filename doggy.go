@@ -1,7 +1,7 @@
 package doggy
 
 import (
-	"log"
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -56,6 +56,6 @@ func init() {
 	// Load default config
 	err := loadConfig()
 	if err != nil {
-		log.Panic(err)
+		fmt.Printf("loadConfig failed, err=%s\n", err)
 	}
 }

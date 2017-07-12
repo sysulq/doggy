@@ -4,7 +4,6 @@ import (
 	"context"
 	"testing"
 
-	"net/url"
 	"time"
 
 	"github.com/stretchr/testify/assert"
@@ -53,9 +52,6 @@ func TestTimeout(t *testing.T) {
 	defer cancel()
 	req := Get(ctx, "http://httpbin.org/get")
 	resp, err := req.String()
-	assert.Equal(t, &url.Error{
-		Err: context.DeadlineExceeded,
-		Op:  "Get",
-		URL: "http://httpbin.org/get"}, err)
+	assert.Regexp(t, "Get http://httpbin.org/get: context", err)
 	assert.Empty(t, resp)
 }
