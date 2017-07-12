@@ -16,22 +16,10 @@
 			"revisionTime": "2016-04-18T22:58:27Z"
 		},
 		{
-			"checksumSHA1": "KzSrcxUDg+p3I7qKJLF2wr1U5So=",
-			"path": "github.com/facebookgo/httpcontrol",
-			"revision": "ccde4420e1fee9af5da365cb76075b95683f39a6",
-			"revisionTime": "2015-07-08T23:40:01Z"
-		},
-		{
 			"checksumSHA1": "x2Km0Qy3WgJJnV19Zv25VwTJcBM=",
 			"path": "github.com/fsnotify/fsnotify",
 			"revision": "4da3e2cfbabc9f751898f250b49f2439785783a1",
 			"revisionTime": "2017-03-29T04:21:07Z"
-		},
-		{
-			"checksumSHA1": "vPYNgNvAIgecEXHiIr7IJosh2n4=",
-			"path": "github.com/go-ini/ini",
-			"revision": "6f66b0e091edb3c7b380f7c4f0f884274d550b67",
-			"revisionTime": "2016-12-21T12:03:40Z"
 		},
 		{
 			"checksumSHA1": "FhQtBYq3/nSeuhKzWoHw26fkzng=",
