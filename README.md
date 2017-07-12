@@ -9,7 +9,6 @@ It aims to provide a composable way to develop HTTP services.
 dependency
 ---
 
-* [go-ini/ini](github.com/go-ini/ini)
 * [uber-go/zap](github.com/uber-go/zap)
 * [gorilla/mux](github.com/gorilla/mux)
 * [gorilla/schema](github.com/gorilla/schema)
@@ -18,4 +17,3 @@ dependency
 * [unrolled/render](github.com/unrolled/render)
 * [asaskevich/govalidator.v4](gopkg.in/asaskevich/govalidator.v4)
 * [julienschmidt/httprouter](github.com/julienschmidt/httprouter)
-* [facebookgo/httpcontrol](github.com/facebookgo/httpcontrol)

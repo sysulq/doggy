@@ -49,13 +49,13 @@ func TestToJSON(t *testing.T) {
 }
 
 func TestTimeout(t *testing.T) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(1*time.Second))
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(1*time.Millisecond))
 	defer cancel()
-	req := Get(ctx, "http://google.com")
+	req := Get(ctx, "http://httpbin.org/get")
 	resp, err := req.String()
 	assert.Equal(t, &url.Error{
 		Err: context.DeadlineExceeded,
 		Op:  "Get",
-		URL: "http://google.com"}, err)
+		URL: "http://httpbin.org/get"}, err)
 	assert.Empty(t, resp)
 }
