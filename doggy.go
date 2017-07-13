@@ -34,6 +34,7 @@ func Classic() *negroni.Negroni {
 	n.Use(middleware.NewRealIP())
 	n.Use(middleware.NewCloseNotify())
 	n.Use(middleware.NewTimeout(viper.GetDuration("middleware.timeout")))
+	n.Use(middleware.NewParseForm())
 	return n
 }
 

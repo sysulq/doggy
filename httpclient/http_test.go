@@ -1,4 +1,4 @@
-package doggy
+package httpclient
 
 import (
 	"context"

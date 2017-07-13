@@ -1,4 +1,4 @@
-package doggy
+package httpclient
 
 import (
 	"bytes"
@@ -7,9 +7,9 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"net/http"
+	"time"
 
 	"github.com/hnlq715/doggy/utils"
-
 	"go.uber.org/zap"
 )
 
@@ -55,16 +55,27 @@ func Post(ctx context.Context, url string, body []byte) *Request {
 }
 
 func (r *Request) Bytes() ([]byte, error) {
+	l := utils.LogFromContext(r.ctx)
+	now := time.Now()
+
 	resp, err := defaultClient.Do(r.req.WithContext(r.ctx))
 	if err != nil {
+		l.Error("defaultClient.Do failed", zap.Error(err))
 		return nil, err
 	}
 
 	data, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
+		l.Error("ioutil.ReadAll failed", zap.Error(err))
 		return nil, err
 	}
 	defer resp.Body.Close()
+
+	l.Info("http request completed",
+		zap.String("url", r.url),
+		zap.ByteString("response", data),
+		zap.String("code", resp.Status),
+		zap.Float64("responsetime", time.Now().Sub(now).Seconds()))
 
 	return data, nil
 }
