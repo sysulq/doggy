@@ -143,10 +143,10 @@
 			"revisionTime": "2016-04-18T22:58:27Z"
 		},
 		{
-			"checksumSHA1": "+H5Ju5flG4ZTNI6xBUBVjUMQoEE=",
+			"checksumSHA1": "xz5MjFbtW0fiCseWFdLAZ88Mi/s=",
 			"path": "github.com/prometheus/client_golang/prometheus",
-			"revision": "575f371f7862609249a1be4c9145f429fe065e32",
-			"revisionTime": "2016-11-24T15:57:32Z"
+			"revision": "95b6848b5c5bb71e3f68cd512ae5a8153c35e41f",
+			"revisionTime": "2017-07-12T16:53:59Z"
 		},
 		{
 			"checksumSHA1": "g9zAgPn3Y7+KmPOVsBTkCztn8nk=",

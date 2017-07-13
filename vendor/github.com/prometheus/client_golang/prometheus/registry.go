@@ -80,7 +80,7 @@ func NewPedanticRegistry() *Registry {
 
 // Registerer is the interface for the part of a registry in charge of
 // registering and unregistering. Users of custom registries should use
-// Registerer as type for registration purposes (rather then the Registry type
+// Registerer as type for registration purposes (rather than the Registry type
 // directly). In that way, they are free to use custom Registerer implementation
 // (e.g. for testing purposes).
 type Registerer interface {
@@ -243,7 +243,7 @@ func (r *Registry) Register(c Collector) error {
 	}()
 	r.mtx.Lock()
 	defer r.mtx.Unlock()
-	// Coduct various tests...
+	// Conduct various tests...
 	for desc := range descChan {
 
 		// Is the descriptor valid at all?
