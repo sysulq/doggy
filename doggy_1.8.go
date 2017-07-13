@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/hnlq715/xgen/utils"
+	"github.com/hnlq715/doggy/utils"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 )

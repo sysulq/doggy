@@ -100,11 +100,6 @@
 			"revisionTime": "2017-05-05T08:58:37Z"
 		},
 		{
-			"checksumSHA1": "usHD7Hx+EhCkT/nZ3esC5Wqde9M=",
-			"path": "github.com/hnlq715/xgen/utils",
-			"revision": ""
-		},
-		{
 			"checksumSHA1": "73SV14dZG7MAb+znuh3ceTUWwjQ=",
 			"path": "github.com/juju/ratelimit",
 			"revision": "77ed1c8a01217656d2080ad51981f6e99adaa177",
