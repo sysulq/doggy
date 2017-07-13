@@ -16,9 +16,17 @@ const logKey = "logKey"
 func LogFromContext(ctx context.Context) *zap.Logger {
 	l, ok := ctx.Value(logKey).(*zap.Logger)
 	if !ok {
-		out := newWriteSyncer()
-		enc := zapcore.NewJSONEncoder(zap.NewProductionEncoderConfig())
-		return zap.New(zapcore.NewCore(enc, out, zapcore.Level(viper.GetInt("log.level"))), zap.AddCaller())
+		env := viper.GetString("env")
+		conf := zap.NewDevelopmentEncoderConfig()
+		if env == "prod" {
+			conf = zap.NewProductionEncoderConfig()
+		}
+		enc := zapcore.NewJSONEncoder(conf)
+		return zap.New(
+			zapcore.NewCore(enc,
+				newWriteSyncer(),
+				zapcore.Level(viper.GetInt("log.level"))),
+			zap.AddCaller())
 	}
 	return l
 }

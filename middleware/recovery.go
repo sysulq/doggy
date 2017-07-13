@@ -2,8 +2,10 @@ package middleware
 
 import (
 	"net/http"
+	"runtime"
 
-	"github.com/uber-go/zap"
+	"github.com/hnlq715/doggy/utils"
+	"go.uber.org/zap"
 )
 
 type Recovery struct {
@@ -19,8 +21,11 @@ func (m *Recovery) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.
 	defer func() {
 		if err := recover(); err != nil {
 			rw.WriteHeader(http.StatusInternalServerError)
-			log := LogFromContext(r.Context())
-			log.Error("Panic", zap.Stack())
+			stack := make([]byte, 1024*8)
+			stack = stack[:runtime.Stack(stack, false)]
+
+			log := utils.LogFromContext(r.Context())
+			log.Error("Panic", zap.Stack(string(stack)))
 		}
 	}()
 

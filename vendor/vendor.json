@@ -232,12 +232,6 @@
 			"revisionTime": "2016-10-27T16:36:08Z"
 		},
 		{
-			"checksumSHA1": "+jvCEXLhnjt6wfFWj5/IcI2meQs=",
-			"path": "github.com/uber-go/zap",
-			"revision": "2a8f287b5620c77c427ac78d29bda4af737f2f00",
-			"revisionTime": "2016-12-02T01:51:19Z"
-		},
-		{
 			"checksumSHA1": "UhwJY3Oqer9FbsV5LqRfasTqUSo=",
 			"path": "github.com/unrolled/render",
 			"revision": "526faf80cd4b305bb8134abea8d20d5ced74faa6",
