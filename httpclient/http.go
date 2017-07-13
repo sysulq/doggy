@@ -8,8 +8,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/hnlq715/doggy/middleware"
-	"github.com/uber-go/zap"
+	"github.com/hnlq715/doggy/utils"
+
+	"go.uber.org/zap"
 )
 
 var (
@@ -23,7 +24,7 @@ type Request struct {
 }
 
 func newRequest(ctx context.Context, method, url string, body []byte) *Request {
-	l := middleware.LogFromContext(ctx).With(zap.String("query", url), zap.String("type", "http"), zap.String("direction", "out"))
+	l := utils.LogFromContext(ctx).With(zap.String("query", url), zap.String("type", "http"), zap.String("direction", "out"))
 
 	req, err := http.NewRequest(method, url, bytes.NewReader(body))
 	if err != nil {

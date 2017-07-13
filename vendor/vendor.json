@@ -226,12 +226,6 @@
 			"revisionTime": "2016-04-18T22:58:27Z"
 		},
 		{
-			"checksumSHA1": "oj5/3DtpIZeMDokyY47RLicpUK8=",
-			"path": "github.com/uber-go/atomic",
-			"revision": "9e99152552a6ce13fa3b2ce4a9c4fb117cca4506",
-			"revisionTime": "2016-10-27T16:36:08Z"
-		},
-		{
 			"checksumSHA1": "UhwJY3Oqer9FbsV5LqRfasTqUSo=",
 			"path": "github.com/unrolled/render",
 			"revision": "526faf80cd4b305bb8134abea8d20d5ced74faa6",
