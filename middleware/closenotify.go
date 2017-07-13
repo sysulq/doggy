@@ -5,8 +5,6 @@ import (
 	"net/http"
 )
 
-const StatusClientClosedRequest = 499
-
 type CloseNotify struct {
 }
 
