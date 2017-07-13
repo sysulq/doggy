@@ -30,7 +30,6 @@ func (c *CloseNotify) ServeHTTP(rw http.ResponseWriter, r *http.Request, next ht
 				return
 			case <-closeNotify:
 				cancel()
-				rw.WriteHeader(StatusClientClosedRequest)
 				return
 			}
 		}()
