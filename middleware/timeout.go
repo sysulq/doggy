@@ -19,12 +19,7 @@ func NewTimeout(timeout time.Duration) *Timeout {
 
 func (m *Timeout) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	ctx, cancel := context.WithTimeout(r.Context(), m.Timeout)
-	defer func() {
-		cancel()
-		if ctx.Err() == context.DeadlineExceeded {
-			rw.WriteHeader(http.StatusGatewayTimeout)
-		}
-	}()
+	defer cancel()
 
 	next(rw, r.WithContext(ctx))
 }
