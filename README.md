@@ -17,3 +17,17 @@ dependency
 * [unrolled/render](github.com/unrolled/render)
 * [asaskevich/govalidator.v4](gopkg.in/asaskevich/govalidator.v4)
 * [julienschmidt/httprouter](github.com/julienschmidt/httprouter)
+
+Generate api struct
+---
+* [himeraCoder/gojson](https://github.com/ChimeraCoder/gojson)
+```
+curl -s https://api.github.com/repos/chimeracoder/gojson | gojson -name=Repository -tags=schema,json
+```
+
+Generate model package
+---
+* [knq/xo](https://github.com/knq/xo)
+```
+xo mysql://user:passwd@host:port/db -o . --template-path templates --ignore-fields updateTime
+```
