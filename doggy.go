@@ -28,9 +28,9 @@ func New(handlers ...negroni.Handler) *negroni.Negroni {
 func Classic() *negroni.Negroni {
 	n := negroni.New()
 	n.Use(middleware.NewRecovery())
+	n.Use(middleware.NewTraceID())
 	logViper := viper.Sub("log")
 	n.Use(middleware.NewLogger(logViper.GetString("level"), logViper.GetString("file")))
-	n.Use(middleware.NewTraceID())
 	n.Use(middleware.NewRealIP())
 	n.Use(middleware.NewCloseNotify())
 	n.Use(middleware.NewTimeout(viper.GetDuration("middleware.timeout")))
