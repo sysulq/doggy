@@ -5,7 +5,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/hnlq715/doggy/utils"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/urfave/negroni"
 )
@@ -44,8 +43,6 @@ func (p *Prometheus) ServeHTTP(rw http.ResponseWriter, r *http.Request, next htt
 	elasped := time.Now().Sub(now).Seconds()
 	requestCounter.WithLabelValues(strconv.Itoa(ww.Status()), r.URL.Path).Inc()
 	requestLatencyHistogram.WithLabelValues(r.URL.Path).Observe(elasped)
-
-	utils.LogFromContext(r.Context()).Info(r.URL.Path)
 }
 
 func init() {
