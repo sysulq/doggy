@@ -52,10 +52,10 @@ func (m *Logger) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.Ha
 
 	log := utils.LogFromContext(r.Context())
 	ctx := utils.ContextWithLog(r.Context(), log)
-
-	next(rw, r.WithContext(ctx))
-
 	ww := negroni.NewResponseWriter(rw)
+
+	next(ww, r.WithContext(ctx))
+
 	log.Info("Completed", zap.Float64("responsetime", time.Now().Sub(now).Seconds()),
 		zap.String("path", r.URL.Path), zap.String("host", r.Host), zap.Int("code", ww.Status()))
 }
