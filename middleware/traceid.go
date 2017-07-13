@@ -9,6 +9,9 @@ import (
 	"os"
 	"strings"
 	"sync/atomic"
+
+	"github.com/hnlq715/doggy/utils"
+	"go.uber.org/zap"
 )
 
 // Key to use when setting the request ID.
@@ -48,6 +51,8 @@ func (m *TraceID) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.H
 	myid := atomic.AddUint64(&reqid, 1)
 	traceID := fmt.Sprintf("%s-%06d", prefix, myid)
 	ctx := context.WithValue(r.Context(), requestIDKey, traceID)
+	log := utils.LogFromContext(ctx).With(zap.String("trace_id", traceID))
+	ctx = utils.ContextWithLog(ctx, log)
 	next(rw, r.WithContext(ctx))
 	rw.Header().Set("TraceID", traceID)
 }
