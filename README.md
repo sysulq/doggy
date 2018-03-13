@@ -27,7 +27,7 @@ curl -s https://api.github.com/repos/chimeracoder/gojson | gojson -name=Reposito
 
 Generate model package
 ---
-* [knq/xo](https://github.com/knq/xo)
+* [hnlq715/xo](https://github.com/hnlq715/xo)
 ```
 xo mysql://user:passwd@host:port/db -o . --template-path templates --ignore-fields updateTime
 ```
