@@ -52,6 +52,6 @@ func TestTimeout(t *testing.T) {
 	defer cancel()
 	req := Get(ctx, "http://httpbin.org/get")
 	resp, err := req.String()
-	assert.Regexp(t, "Get http://httpbin.org/get:", err)
+	assert.Regexp(t, "context deadline exceeded", err)
 	assert.Empty(t, resp)
 }
