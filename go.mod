@@ -8,7 +8,7 @@ require (
 	github.com/juju/ratelimit v1.0.1
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/prometheus/client_golang v1.11.0
-	github.com/spf13/viper v1.9.0
+	github.com/spf13/viper v1.10.1
 	github.com/stretchr/testify v1.7.0
 	github.com/unrolled/render v1.4.0
 	github.com/urfave/negroni v1.0.0
