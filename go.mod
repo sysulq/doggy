@@ -13,6 +13,6 @@ require (
 	github.com/unrolled/render v1.4.0
 	github.com/urfave/negroni v1.0.0
 	go.uber.org/zap v1.21.0
-	gopkg.in/asaskevich/govalidator.v4 v4.0.0-20160518190739-766470278477
+	gopkg.in/asaskevich/govalidator.v11 v11.0.1
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 )
