@@ -12,7 +12,7 @@ require (
 	github.com/stretchr/testify v1.8.0
 	github.com/unrolled/render v1.5.0
 	github.com/urfave/negroni v1.0.0
-	go.uber.org/zap v1.21.0
+	go.uber.org/zap v1.22.0
 	gopkg.in/asaskevich/govalidator.v11 v11.0.1
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 )
